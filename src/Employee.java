@@ -47,6 +47,7 @@ public class Employee {
         this.salary = salary;
     }
 
+
     @Override
     public String toString() {
         return "Сотрудник " + id + " - " +
@@ -56,5 +57,6 @@ public class Employee {
                 ". Работает в отделе: " + departament +
                 ", Заработная плата: " + salary + " руб.";
     }
+
 }
 
