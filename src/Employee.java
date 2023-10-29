@@ -73,12 +73,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return departament == employee.departament && salary == employee.salary && id == employee.id && Objects.equals(surname, employee.surname) && Objects.equals(name, employee.name) && Objects.equals(patronimic, employee.patronimic);
+        return departament == employee.departament && id == employee.id && Objects.equals(surname, employee.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surname, name, patronimic, departament, salary, id);
+        return Objects.hash(surname, departament, id);
     }
 
     private int validateDepartament(int departament) {
