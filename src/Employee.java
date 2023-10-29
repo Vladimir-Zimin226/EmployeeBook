@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Employee {
 
     private static int count = 0;
@@ -13,8 +15,8 @@ public class Employee {
         this.surname = surname;
         this.name = name;
         this.patronimic = patronimic;
-        this.departament = departament;
-        this.salary = salary;
+        this.departament = validateDepartament(departament);
+        this.salary = validateSalary(salary);
         count++;
         id = count;
     }
@@ -51,6 +53,10 @@ public class Employee {
         return id;
     }
 
+    public static int getCount() {
+        return count;
+    }
+
 
     @Override
     public String toString() {
@@ -62,5 +68,25 @@ public class Employee {
                 ", Заработная плата: " + salary + " руб.";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return departament == employee.departament && salary == employee.salary && id == employee.id && Objects.equals(surname, employee.surname) && Objects.equals(name, employee.name) && Objects.equals(patronimic, employee.patronimic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surname, name, patronimic, departament, salary, id);
+    }
+
+    private int validateDepartament(int departament) {
+        return departament < 1 || departament > 5 ? 1 : departament;
+    }
+
+    private int validateSalary(int salary) {
+        return salary < 0 ? 25_000 : salary;
+    }
 }
 

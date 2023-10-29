@@ -1,14 +1,14 @@
 
 public class Main {
 
-    public static void main(String[] args) {
+    private static Employee[] employees = new Employee[10];
 
-        Employee[] employees = new Employee[10];
+    public static void main(String[] args) {
 
         employees[0] = new Employee("Иванов", "Иван", "Иванович", 1, 99_000);
         employees[1] = new Employee("Петров", "Петр", "Петрович", 1, 100_000);
         employees[2] = new Employee("Сидоров", "Сидор", "Сидорович", 2, 120_000);
-        employees[3] = new Employee("Свиридов", "Свирид", "Свиридович", 2, 120_000);
+        employees[3] = new Employee("Свиридов", "Свирид", "Свиридович", 2, 125_000);
         employees[4] = new Employee("Павлов", "Павел", "Павлович", 2, 140_000);
         employees[5] = new Employee("Егоров", "Егор", "Егорович", 3, 152_000);
         employees[6] = new Employee("Александров", "Александр", "Александрович", 3, 140_000);
@@ -16,209 +16,210 @@ public class Main {
         employees[8] = new Employee("Сергеев", "Сергей", "Сергеевич", 4, 180_000);
         employees[9] = new Employee("Владимиров", "Владимир", "Владимирович", 5, 200_000);
 
-        //printAllEmployees(employees);
+        //printAllEmployees();
 
-        //calculationTotalSalary(employees);
+        //calculateTotalSalary();
 
-        //findPoorEmployee(employees);
+        //findPoorEmployee();
 
-        //findReachEmployee(employees);
+        //findReachEmployee();
 
-        //calculationAverageSalaryM1(employees);
+        //calculationAverageSalary();
 
-        //calculationAverageSalaryM2(employees);
+        //printEmployeesFullName();
 
-        //printEmployeesNSP(employees);
+        //indexSalaries(20);
 
-        //indexSalaries(employees);
+        //findPoorDepartamentEmployee(4);
 
-        //findPoorDepartamentEmployee(employees, 1);
+        //findReachDepartamentEmployee(4);
 
-        //findReachDepartamentEmployee(employees, 5);
+        //calculationTotalDepartamentSalary(2);
 
-        //calculationTotalDepartamentSalary(employees, 1);
+        //calculationAverageDepartamentSalary(3);
 
-        //calculationAverageDepartamentSalary(employees, 5);
+        //indexDepartamentSalaries(3, 50);
 
-        //indexDepartamentSalaries(employees, 5, 50);
+        //printDepartamentEmployees(4);
 
-        //printDepartamentEmployees(employees, 5);
+        //findSalaryLessRandomNumber(150000);
 
-        //findSalaryLessRandomNumber(employees, 150000);
-
-        //findSalaryGreatRandomNumber(employees, 180000);
+        findSalaryGreatRandomNumber(180000);
 
     }
 
-    public static void printAllEmployees(Employee[] employees) {
-        for (int i = 0; i < employees.length; i++) {
-            System.out.println(employees[i]);
+
+    public static void printAllEmployees() {
+        for (Employee employee : employees) {
+            System.out.println(employee);
         }
     }
 
-    public static int calculationTotalSalary(Employee[] employees) {
+    public static double calculateTotalSalary() {
         int totalSalary = 0;
-        for (int i = 0; i < employees.length; i++) {
-            totalSalary += employees[i].getSalary();
+        for (Employee employee : employees) {
+            if (employee != null) {
+                totalSalary += employee.getSalary();
+            }
         }
         System.out.println("Сумма затрат на зарплаты в месяц составляет " + totalSalary + " руб.");
         return totalSalary;
     }
 
-    public static void findPoorEmployee(Employee[] employees) {
+    public static void findPoorEmployee() {
         double minSalary = Double.MAX_VALUE;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() < minSalary) {
-                minSalary = employees[i].getSalary();
+        for (Employee employee : employees) {
+            if (employee.getSalary() < minSalary) {
+                minSalary = employee.getSalary();
             }
         }
         System.out.println("Минимальная зарплата сотрудника: " + minSalary + " руб.");
-        for (int i = 0; i < employees.length; i++) {
-            if (minSalary == employees[i].getSalary()) {
-                System.out.println("Сотрудник: " + employees[i].getSurname() + " " + employees[i].getName());
+        for (Employee employee : employees) {
+            if (minSalary == employee.getSalary()) {
+                System.out.println("Сотрудник: " + employee.getSurname() + " " + employee.getName());
             }
         }
     }
 
-    public static void findReachEmployee(Employee[] employees) {
+    public static void findReachEmployee() {
         double maxSalary = Double.MIN_VALUE;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() > maxSalary) {
-                maxSalary = employees[i].getSalary();
+        for (Employee employee : employees) {
+            if (employee.getSalary() > maxSalary) {
+                maxSalary = employee.getSalary();
             }
         }
         System.out.println("Максимальная затрата сотрудника: " + maxSalary + " руб.");
-        for (int i = 0; i < employees.length; i++) {
-            if (maxSalary == employees[i].getSalary()) {
-                System.out.println("Сотрудник: " + employees[i].getSurname() + " " + employees[i].getName());
+        for (Employee employee : employees) {
+            if (maxSalary == employee.getSalary()) {
+                System.out.println("Сотрудник: " + employee.getSurname() + " " + employee.getName());
             }
         }
     }
 
-    public static void calculationAverageSalaryM1(Employee[] employees) {
-        int averageSalary = calculationTotalSalary(employees) / employees.length;
+    public static void calculationAverageSalary() {
+        double averageSalary = calculateTotalSalary() / Employee.getCount();
         System.out.println("Средняя зарплата в компании: " + averageSalary + " руб.");
     }
 
-    public static void calculationAverageSalaryM2(Employee[] employees) {
-        int averageSalary = 0;
-        int totalSalary = 0;
-        for (int i = 0; i < employees.length; i++) {
-            totalSalary += employees[i].getSalary();
-        }
-        averageSalary = totalSalary / employees.length;
-        System.out.println("Средняя зарплата в компании: " + averageSalary + " руб.");
-    }
-
-    public static void printEmployeesNSP(Employee[] employees) {
-        for (int i = 0; i < employees.length; i++) {
-            System.out.println("Сотрудник: " + employees[i].getSurname() + " " + employees[i].getName() + " " + employees[i].getPatronimic());
+    public static void printEmployeesFullName() {
+        for (Employee employee : employees) {
+            if (employee != null) {
+                System.out.println("Сотрудник: " + employee.getSurname() + " " + employee.getName() + " " + employee.getPatronimic());
+            }
         }
     }
 
-    public static void indexSalaries(Employee[] employees, double percent) {
+    public static void indexSalaries(double percent) {
         double indexPercent = percent / 100;
         double indexedSalary;
-        for (int i = 0; i < employees.length; i++) {
-            indexedSalary = employees[i].getSalary() + (employees[i].getSalary() * indexPercent);
-            employees[i].setSalary((int) indexedSalary);
-            System.out.println(employees[i]);
+        for (Employee employee : employees) {
+            indexedSalary = employee.getSalary() + (employee.getSalary() * indexPercent);
+            employee.setSalary((int) indexedSalary);
+            System.out.println(employee);
         }
     }
 
-    public static void findPoorDepartamentEmployee(Employee[] employees, int departament) {
+    public static void findPoorDepartamentEmployee(int departament) {
+        System.out.println("Сотрудник с наименьшей зарплатой в отделе: ");
         double minSalary = Double.MAX_VALUE;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() < minSalary && employees[i].getDepartament() == departament) {
-                minSalary = employees[i].getSalary();
+        Employee result = null;
+        for (Employee employee : employees) {
+            if (employee.getDepartament() != departament) {
+                continue;
+            }
+            if (employee.getSalary() < minSalary) {
+                minSalary = employee.getSalary();
+                result = employee;
             }
         }
-        System.out.println("Минимальная зарплата сотрудника отдела " + departament + " : " + minSalary + " руб.");
-        for (int i = 0; i < employees.length; i++) {
-            if (minSalary == employees[i].getSalary()) {
-                System.out.println("Сотрудник: " + employees[i].getSurname() + " " + employees[i].getName());
-            }
-        }
+        System.out.println(result);
     }
 
-    public static void findReachDepartamentEmployee(Employee[] employees, int departament) {
+
+    public static void findReachDepartamentEmployee(int departament) {
+        System.out.println("Сотрудник с наибольшей зарплатой в отделе: ");
         double maxSalary = Double.MIN_VALUE;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() > maxSalary && employees[i].getDepartament() == departament) {
-                maxSalary = employees[i].getSalary();
+        Employee result = null;
+        for (Employee employee : employees) {
+            if (employee.getDepartament() != departament) {
+                continue;
+            }
+            if (employee.getSalary() > maxSalary) {
+                maxSalary = employee.getSalary();
+                result = employee;
             }
         }
-        System.out.println("Максимальная зарплата сотрудника отдела " + departament + " : " + maxSalary + " руб.");
-        for (int i = 0; i < employees.length; i++) {
-            if (maxSalary == employees[i].getSalary()) {
-                System.out.println("Сотрудник: " + employees[i].getSurname() + " " + employees[i].getName());
-            }
-        }
+        System.out.println(result);
     }
 
-    public static void calculationTotalDepartamentSalary(Employee[] employees, int departament) {
+    public static int calculationTotalDepartamentSalary(int departament) {
         int totalDepartamentSalary = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartament() == departament) {
-                totalDepartamentSalary += employees[i].getSalary();
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartament() == departament) {
+                totalDepartamentSalary += employee.getSalary();
             }
         }
         System.out.println("Сумма затрат на зарплаты отдела " + departament + " в месяц составляет " + totalDepartamentSalary + " руб.");
+        return totalDepartamentSalary;
     }
 
-
-    public static void calculationAverageDepartamentSalary(Employee[] employees, int departament) {
+    public static float calculationAverageDepartamentSalary(int departament) {
         int totalDepartamentSalary = 0;
         int departamentEmployees = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartament() == departament) {
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartament() == departament) {
                 departamentEmployees++;
-                totalDepartamentSalary += employees[i].getSalary();
-//                System.out.println(departamentEmployees);
+                totalDepartamentSalary += employee.getSalary();
+                int averageDepartamentSalary = totalDepartamentSalary / departamentEmployees;
+                System.out.println("Средняя зарплата в отделе " + departament + " : " + averageDepartamentSalary + " руб.");
             }
+
         }
-        int averageDepartamentSalary = totalDepartamentSalary / departamentEmployees;
-        System.out.println("Средняя зарплата в отделе " + departament + " : " + averageDepartamentSalary + " руб.");
+        return totalDepartamentSalary;
     }
 
-    public static void indexDepartamentSalaries(Employee[] employees, int departament, double percent) {
-        double indexPercent = percent / 100;
-        double indexedDepartamentSalary;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartament() == departament) {
-                indexedDepartamentSalary = employees[i].getSalary() + (employees[i].getSalary() * indexPercent);
-                employees[i].setSalary((int) indexedDepartamentSalary);
-                System.out.println(employees[i]);
+        public static void indexDepartamentSalaries (int departament, double percent){
+            double indexPercent = percent / 100;
+            double indexedDepartamentSalary;
+            for (Employee employee : employees) {
+                if (employee != null && employee.getDepartament() == departament) {
+                    indexedDepartamentSalary = employee.getSalary() + (employee.getSalary() * indexPercent);
+                    employee.setSalary((int) indexedDepartamentSalary);
+                    System.out.println(employee);
+                }
             }
         }
-    }
 
-    public static void printDepartamentEmployees(Employee[] employees, int departament) {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartament() == departament) {
-                System.out.println("Сотрудник отдела: " + employees[i].getSurname() + " " + employees[i].getName() + " " + employees[i].getPatronimic() + ", заработная плата - " + employees[i].getSalary() + " руб.");
+        public static void printDepartamentEmployees (int departament){
+            for (Employee employee : employees) {
+                if (employee != null && employee.getDepartament() == departament) {
+                    System.out.println("Сотрудник отдела: " + employee.getSurname() + " " + employee.getName() + " " + employee.getPatronimic() + ", заработная плата - " + employee.getSalary() + " руб.");
+                }
             }
         }
-    }
 
-    public static void findSalaryLessRandomNumber(Employee[] employees, double randomNumber) {
-        System.out.println("Сотрудники с меньшей зарплатой: ");
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() < randomNumber) {
-                System.out.println("id: " + employees[i].getId() + " " + employees[i].getSurname() + " " + employees[i].getName() + " " + employees[i].getPatronimic() + ", заработная плата - " + employees[i].getSalary() + " руб.");
+        public static void findSalaryLessRandomNumber (double randomNumber){
+            System.out.println("Сотрудники с меньшей зарплатой: ");
+            for (Employee employee : employees) {
+                if (employee.getSalary() < randomNumber) {
+                    System.out.println("id: " + employee.getId() + " " + employee.getSurname() + " " + employee.getName() + " " + employee.getPatronimic() + ", заработная плата - " + employee.getSalary() + " руб.");
+                }
             }
         }
-    }
 
-    public static void findSalaryGreatRandomNumber(Employee[] employees, double randomNumber) {
-        System.out.println("Сотрудники с равной и большей зарплатой: ");
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() >= randomNumber) {
-                System.out.println("id: " + employees[i].getId() + " " + employees[i].getSurname() + " " + employees[i].getName() + " " + employees[i].getPatronimic() + ", заработная плата - " + employees[i].getSalary() + " руб.");
+        public static void findSalaryGreatRandomNumber (double randomNumber){
+            System.out.println("Сотрудники с равной и большей зарплатой: ");
+            for (Employee employee : employees) {
+                if (employee.getSalary() >= randomNumber) {
+                    System.out.println("id: " + employee.getId() + " " + employee.getSurname() + " " + employee.getName() + " " + employee.getPatronimic() + ", заработная плата - " + employee.getSalary() + " руб.");
+                }
             }
         }
+
+
     }
 
 
-}
+
+
 
