@@ -253,7 +253,7 @@ public class EmployeeBook {
      */
     public void changeSalaryOfEmployee(String surname, int salary) {
         for (Employee employee : employees) {
-            if (employee.getSurname().equals(surname)) {
+            if (employee != null && employee.getSurname().equals(surname)) {
                 employee.setSalary(salary);
             }
         }
@@ -264,8 +264,8 @@ public class EmployeeBook {
      */
     public void changeDepartamentOfEmployee(String surname, int id, int departament) {
         for (Employee employee : employees) {
-            if (employee.getSurname().equals(surname)) {
-                employee.setSalary(departament);
+            if (employee != null && employee.getSurname().equals(surname)) {
+                employee.setDepartament(departament);
             }
         }
     }
@@ -273,7 +273,7 @@ public class EmployeeBook {
     /**
      * Печать сотрудников списком, по отделам
      */
-    public void EmployeeByDepartaments() {
+    public void employeeByDepartaments() {
         System.out.println("Сотрудники отдела № 1");
         for (Employee employee : employees) {
             if (employee.getDepartament() == 1) {

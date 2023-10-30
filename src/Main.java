@@ -17,7 +17,9 @@ public class Main {
 
         employeeBook.createEmployee("Семенов", "Семен", "Семенович", 2, 145_000);
 
-        employeeBook.removeEmployee(10);
+        employeeBook.changeDepartamentOfEmployee("Егоров", 5, 4);
+
+        employeeBook.changeSalaryOfEmployee("Егоров", 187_000);
 
         employeeBook.printAllEmployees();
     }

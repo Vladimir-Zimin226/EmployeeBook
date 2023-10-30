@@ -12,9 +12,9 @@ public class Employee {
 
 
     public Employee(String surname, String name, String patronimic, int departament, int salary) {
-        this.surname = surname;
-        this.name = name;
-        this.patronimic = patronimic;
+        this.surname = validateSurname(surname);
+        this.name = validateName(name);
+        this.patronimic = validatePatronimic(patronimic);
         this.departament = validateDepartament(departament);
         this.salary = validateSalary(salary);
         count++;
@@ -87,6 +87,18 @@ public class Employee {
 
     private int validateSalary(int salary) {
         return salary < 0 ? 25_000 : salary;
+    }
+
+    private String validateSurname(String surname) {
+        return surname == null ? "WithoutSurname" : surname;
+    }
+
+    private String validateName(String name) {
+        return name == null ? "WithoutName" : name;
+    }
+
+    private String validatePatronimic(String patronimic) {
+        return patronimic == null ? "WithoutPatronimic" : patronimic;
     }
 }
 
